@@ -95,7 +95,7 @@ namespace PingReporter
         {
             List<PingEvent> events = new List<PingEvent>();
 
-            Console.Write("Please enter what you wish the report to be named:");
+            Console.Write("Please enter what you wish the report to be named: ");
             string reportName = Console.ReadLine();
 
             Console.Write("Enter the IP address to ping: ");
