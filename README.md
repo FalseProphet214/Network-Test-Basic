@@ -15,3 +15,4 @@
 		- Research maybe only showing the longest ping time out duration times?
 	Look into adding a timer set by user to let the program be automated
 	Look into additional data that may be useful in the report
+	Add code for user to name the report
