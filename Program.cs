@@ -5,12 +5,6 @@ using System.IO;
 
 namespace PingReporter
 {
-    class PingEvent
-    {
-        public bool IsTimeout { get; set; }
-        public DateTime Timestamp { get; set; }
-    }
-
     class Program
     {
         static void GenerateReport(List<PingEvent> events, DateTime testStartTime, DateTime testEndTime)
