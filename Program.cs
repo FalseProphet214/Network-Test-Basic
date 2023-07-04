@@ -23,7 +23,7 @@ namespace PingReporter
                 writer.WriteLine("Test Start Time: " + testStartTime);
                 writer.WriteLine("Test End Time: " + testEndTime);
 
-                writer.WriteLine("\nPing Events:\n");
+                // writer.WriteLine("\nPing Events:\n");
 
                 bool isPreviousTimeout = false;
                 bool isPreviousResponse = false;
@@ -38,7 +38,7 @@ namespace PingReporter
                     {
                         if (!isPreviousTimeout)
                         {
-                            writer.WriteLine("Timeout occurred at: " + pingEvent.Timestamp);
+                            // writer.WriteLine("Timeout occurred at: " + pingEvent.Timestamp);
                             isPreviousTimeout = true;
                             isPreviousResponse = false;
                             timeoutCount++;
@@ -53,7 +53,7 @@ namespace PingReporter
                     {
                         if (!isPreviousResponse)
                         {
-                            writer.WriteLine("Ping response resumed at: " + pingEvent.Timestamp);
+                            // writer.WriteLine("Ping response resumed at: " + pingEvent.Timestamp);
                             isPreviousResponse = true;
                             isPreviousTimeout = false;
 
@@ -82,7 +82,10 @@ namespace PingReporter
                 }
 
                 writer.WriteLine("\nTotal Timeouts: " + timeoutCount);
-                // writer.WriteLine("Longest Timeout Period: " + longestTimeoutPeriod.ToString(@"hh\:mm\:ss"));
+                if (timeoutCount > 0)
+                {
+                    writer.WriteLine("Longest Timeout Period: " + longestTimeoutPeriod);
+                }
             }
 
             Console.WriteLine("Report generated successfully.");
