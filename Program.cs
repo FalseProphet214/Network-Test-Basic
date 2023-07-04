@@ -13,9 +13,9 @@ namespace PingReporter
 
     class Program
     {
-        static void GenerateReport(List<PingEvent> events, DateTime testStartTime, DateTime testEndTime)
+        static void GenerateReport(List<PingEvent> events, DateTime testStartTime, DateTime testEndTime, string ReportName)
         {
-            string reportPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\report.txt";
+            string reportPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + ReportName + ".txt";
 
             using (StreamWriter writer = new StreamWriter(reportPath))
             {
@@ -95,6 +95,9 @@ namespace PingReporter
         {
             List<PingEvent> events = new List<PingEvent>();
 
+            Console.Write("Please enter what you wish the report to be named: ");
+            string reportName = Console.ReadLine();
+
             Console.Write("Enter the IP address to ping: ");
             string ipAddress = Console.ReadLine();
             ipAddress = "192.168.50.154";
@@ -152,7 +155,9 @@ namespace PingReporter
 
             DateTime testEndTime = DateTime.Now;
 
-            GenerateReport(events, testStartTime, testEndTime);
+            
+
+            GenerateReport(events, testStartTime, testEndTime, reportName);
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
