@@ -127,7 +127,7 @@ namespace PingReporter
                         break;
                     }
 
-                    if (line.Contains("Request timed out"))
+                    if (line.Contains("Request timed out") || line.Contains("Destination host unreachable"))
                     {
                         PingEvent pingEvent = new PingEvent
                         {
