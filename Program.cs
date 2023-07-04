@@ -29,8 +29,8 @@ namespace PingReporter
                 bool isPreviousResponse = false;
                 int timeoutCount = 0;
                 TimeSpan longestTimeoutPeriod = TimeSpan.Zero;
-                DateTime timeoutStart = DateTime.MinValue;
-                DateTime previousEventTime = DateTime.MinValue;
+                DateTime timeoutStart = DateTime.Now;
+                DateTime previousEventTime = DateTime.Now;
 
                 foreach (PingEvent pingEvent in events)
                 {
@@ -43,7 +43,7 @@ namespace PingReporter
                             isPreviousResponse = false;
                             timeoutCount++;
 
-                            if (timeoutStart == DateTime.MinValue)
+                            if (timeoutStart != pingEvent.Timestamp)
                             {
                                 timeoutStart = pingEvent.Timestamp;
                             }
@@ -64,7 +64,7 @@ namespace PingReporter
                                 longestTimeoutPeriod = timeoutPeriod;
                             }
 
-                            timeoutStart = DateTime.MinValue;
+                            // timeoutStart = DateTime.Now;
                         }
                     }
 
@@ -97,6 +97,7 @@ namespace PingReporter
 
             Console.Write("Enter the IP address to ping: ");
             string ipAddress = Console.ReadLine();
+            ipAddress = "192.168.50.154";
 
             string command = "ping " + ipAddress + " -t";
 
@@ -126,7 +127,7 @@ namespace PingReporter
                         break;
                     }
 
-                    if (line.Contains("Request timed out"))
+                    if (line.Contains("Request timed out") || line.Contains("Destination host unreachable"))
                     {
                         PingEvent pingEvent = new PingEvent
                         {
