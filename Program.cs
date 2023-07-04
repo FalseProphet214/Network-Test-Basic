@@ -100,7 +100,6 @@ namespace PingReporter
 
             Console.Write("Enter the IP address to ping: ");
             string ipAddress = Console.ReadLine();
-            ipAddress = "192.168.50.154";
 
             string command = "ping " + ipAddress + " -t";
 
