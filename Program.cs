@@ -103,9 +103,9 @@ namespace PingReporter
             string reportName = Console.ReadLine();
 
             // This corrently does nothing, however I am researching to add a timer to the program so that it will end and generate the report after a specific time the user enters
-            Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
-            string reportDuration = Console.ReadLine();
-            Console.Write("You can press any key at any time to stop the report early.\n \n");
+            // Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
+            // string reportDuration = Console.ReadLine();
+            // Console.Write("You can press any key at any time to stop the report early.\n \n");
 
             // Where the user enters the neccessary IP Address to ping. I have been using 8.8.8.8 for testing
             Console.Write("Enter the IP address to ping: ");
