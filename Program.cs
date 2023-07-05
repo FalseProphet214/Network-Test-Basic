@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace PingReporter
 {
@@ -23,7 +24,7 @@ namespace PingReporter
                 writer.WriteLine("Test Start Time: " + testStartTime);
                 writer.WriteLine("Test End Time: " + testEndTime);
 
-                // writer.WriteLine("\nPing Events:\n");
+                writer.WriteLine("\nPing Events:\n");
 
                 bool isPreviousTimeout = false;
                 bool isPreviousResponse = false;
@@ -38,7 +39,7 @@ namespace PingReporter
                     {
                         if (!isPreviousTimeout)
                         {
-                            // writer.WriteLine("Timeout occurred at: " + pingEvent.Timestamp);
+                            writer.WriteLine("Timeout occurred at: " + pingEvent.Timestamp);
                             isPreviousTimeout = true;
                             isPreviousResponse = false;
                             timeoutCount++;
@@ -53,7 +54,7 @@ namespace PingReporter
                     {
                         if (!isPreviousResponse)
                         {
-                            // writer.WriteLine("Ping response resumed at: " + pingEvent.Timestamp);
+                            writer.WriteLine("Ping response resumed at: " + pingEvent.Timestamp);
                             isPreviousResponse = true;
                             isPreviousTimeout = false;
 
@@ -64,6 +65,7 @@ namespace PingReporter
                                 longestTimeoutPeriod = timeoutPeriod;
                             }
 
+                            // I genuinly don't remember why I put this here and the code runs without it for now. But I am also paranoid and dont wanna delete it
                             // timeoutStart = DateTime.Now;
                         }
                     }
@@ -95,12 +97,19 @@ namespace PingReporter
         {
             List<PingEvent> events = new List<PingEvent>();
 
+
+            // Allow end user to name the report. This should help with general organization
             Console.Write("Please enter what you wish the report to be named: ");
             string reportName = Console.ReadLine();
 
+            // This corrently does nothing, however I am researching to add a timer to the program so that it will end and generate the report after a specific time the user enters
+            Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
+            string reportDuration = Console.ReadLine();
+            Console.Write("You can press any key at any time to stop the report early.\n \n");
+
+            // Where the user enters the neccessary IP Address to ping. I have been using 8.8.8.8 for testing
             Console.Write("Enter the IP address to ping: ");
             string ipAddress = Console.ReadLine();
-            ipAddress = "192.168.50.154";
 
             string command = "ping " + ipAddress + " -t";
 
@@ -154,8 +163,6 @@ namespace PingReporter
             }
 
             DateTime testEndTime = DateTime.Now;
-
-            
 
             GenerateReport(events, testStartTime, testEndTime, reportName);
 
