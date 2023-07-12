@@ -97,26 +97,47 @@ namespace PingReporter
         {
             List<PingEvent> events = new List<PingEvent>();
 
-
             // Allow end user to name the report. This should help with general organization
             Console.Write("Please enter what you wish the report to be named: ");
             string reportName = Console.ReadLine();
 
             // This corrently does nothing, however I am researching to add a timer to the program so that it will end and generate the report after a specific time the user enters
-            // Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
-            // string reportDuration = Console.ReadLine();
-            // Console.Write("You can press any key at any time to stop the report early.\n \n");
+            Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
+            string reportDuration = Console.ReadLine();
+            Console.Write("\nYou can press any key at any time to stop the report early.");
 
             // Where the user enters the neccessary IP Address to ping. I have been using 8.8.8.8 for testing
-            Console.Write("Enter the IP address to ping: ");
+            Console.Write("\nEnter the IP address to ping: ");
             string ipAddress = Console.ReadLine();
 
+            // Creating the command to run the continuous ping
             string command = "ping " + ipAddress + " -t";
 
+            // letting the user know which IP is being used
             Console.WriteLine("Pinging " + ipAddress + ". Press any key to stop.");
 
+            // Setting this variable for the report
             DateTime testStartTime = DateTime.Now;
 
+            // Using these variables to control how long the report runs
+            TimeSpan duration;
+            DateTime endTime;
+
+            // if the user enters 0 as the time, the report will run indefinitely until the user tells it to stop
+            if (reportDuration == "0")
+            {
+                duration = TimeSpan.MaxValue;
+                endTime = DateTime.MaxValue;
+            }
+            // Otherwise the program will run for however many hours the user inputs
+            // The program will still stop if the user hits any key on the keyboard while the command window is active, but this section can allow the command to run "out of the way" so to speak
+            else
+            {
+                duration = TimeSpan.FromHours(Convert.ToDouble(reportDuration));
+                endTime = testStartTime.Add(duration);
+            }
+
+            // starting the command
             using (Process process = new Process())
             {
                 process.StartInfo.FileName = "cmd.exe";
@@ -135,6 +156,11 @@ namespace PingReporter
                     Console.WriteLine(line);
 
                     if (Console.KeyAvailable)
+                    {
+                        break;
+                    }
+
+                    if (DateTime.Now >= endTime)
                     {
                         break;
                     }
