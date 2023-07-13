@@ -97,6 +97,8 @@ namespace PingReporter
         {
             List<PingEvent> events = new List<PingEvent>();
 
+            int timeoutPeriod = 0;
+            
             // Allow end user to name the report. This should help with general organization
             Console.Write("Please enter what you wish the report to be named: ");
             string reportName = Console.ReadLine();
@@ -104,7 +106,17 @@ namespace PingReporter
             // This corrently does nothing, however I am researching to add a timer to the program so that it will end and generate the report after a specific time the user enters
             Console.Write("\nHow many hours do you want the program to run (Enter 0 to have it run continuously): ");
             string reportDuration = Console.ReadLine();
-            Console.Write("\nYou can press any key at any time to stop the report early.");
+            Console.Write("You can press any key at any time to stop the report early.");
+
+            Console.Write("\nDo you want to set an extended timeout period for ping (Y or N): ");
+            string timeout = Console.ReadLine();
+
+            if (timeout.ToLower() == "y" || timeout.ToLower() == "yes")
+            {
+                Console.WriteLine("\nHow long in seconds do you want the timeout period to be: ");
+                string period = Console.ReadLine();
+                timeoutPeriod = int.Parse(period) * 1000;
+            }
 
             // Where the user enters the neccessary IP Address to ping. I have been using 8.8.8.8 for testing
             Console.Write("\nEnter the IP address to ping: ");
@@ -112,11 +124,16 @@ namespace PingReporter
 
             // Creating the command to run the continuous ping
             string command = "ping " + ipAddress + " -t";
+            if (timeoutPeriod > 0)
+            {
+                command = "ping " + ipAddress + " -t -w " + timeoutPeriod;
+            }
+            
 
             // letting the user know which IP is being used
             Console.WriteLine("Pinging " + ipAddress + ". Press any key to stop.");
 
-            // Setting this variable for the report
+            // Setting this variable for the report to display the start time of the test
             DateTime testStartTime = DateTime.Now;
 
             // Using these variables to control how long the report runs
