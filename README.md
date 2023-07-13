@@ -7,10 +7,8 @@ It will run a continuous ping of that IP Address for as long as you leave the pr
 None at the moment.
 
 ## To-Do
-	Rework how the dropped pings show in the report
-		- Research maybe only showing the longest ping time out duration times?
-	Look into adding a timer set by user to let the program be automated
+	Look into adding a timer set by user to let the program be automated - Complete
 	Look into additional data that may be useful in the report
 	Research the different Ping Responses in order to take those into account
 	Allow user set timeout for pings - Complete
-	Have program immediately open the report once test is ended
+	Add code to open report as soon as test is done
