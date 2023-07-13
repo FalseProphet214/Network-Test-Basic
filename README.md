@@ -12,3 +12,5 @@ None at the moment.
 	Look into adding a timer set by user to let the program be automated
 	Look into additional data that may be useful in the report
 	Research the different Ping Responses in order to take those into account
+	Allow user set timeout for pings - Complete
+	Have program immediately open the report once test is ended
