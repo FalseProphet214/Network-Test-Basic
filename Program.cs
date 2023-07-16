@@ -15,7 +15,7 @@ namespace PingReporter
     {
         static void GenerateReport(List<PingEvent> events, DateTime testStartTime, DateTime testEndTime, string ReportName, string tracertOutput)
         {
-            string reportPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + reportName + ".txt";
+            string reportPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + ReportName + ".txt";
 
             using (StreamWriter writer = new StreamWriter(reportPath))
             {
