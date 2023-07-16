@@ -211,6 +211,9 @@ namespace PingReporter
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
+
+            // To open the report for immediate review
+            Process.Start(new ProcessStartInfo("notepad.exe", Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + reportName + ".txt"));
         }
     }
 }

@@ -12,3 +12,4 @@ None at the moment.
 	Research the different Ping Responses in order to take those into account
 	Allow user set timeout for pings - Complete
 	Add code to open report as soon as test is done
+	Add code to run a TraceRT as soon as pings start timing out
