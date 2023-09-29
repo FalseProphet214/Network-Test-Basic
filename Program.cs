@@ -208,7 +208,7 @@ namespace PingReporter
             DateTime endTime;
 
             // if the user enters 0 as the time, the report will run indefinitely until the user tells it to stop
-            if (reportDuration == "0")
+            if (reportDuration == "0" || reportDuration == "")
             {
                 duration = TimeSpan.MaxValue;
                 endTime = DateTime.MaxValue;
